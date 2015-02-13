@@ -1,0 +1,35 @@
+#define macro
+
+CC      = g++
+CFLAGS1  = -Wall -std=c++0x -g3
+CFLAGS2  = -I/share/apps/openmpi-intel/1.6.4_hcoll/include -I/scratch/chengbin.wang/lib/log4cpp/1.1.1/include -I/scratch/chengbin.wang/lib/boost/1.55.0_2/include
+LDFLAGS = -llog4cpp.5 -llog4cpp -lmpi -lmpi_cxx
+LPFLAGS = -L/scratch/chengbin.wang/lib/log4cpp/1.1.1/lib  -L/share/apps/openmpi-intel/1.6.4_hcoll/lib
+
+all: Assignment_A clean
+
+Assignment_A: HW1.o Normality.o Scrubber.o Outlier.o Record.o Utils.o Logging.o
+	$(CC) $(LDFLAGS) $(LPFLAGS) HW1.o Normality.o Scrubber.o Outlier.o Record.o Utils.o Logging.o -o Assignment_A
+
+HW1.o: HW1.cpp 
+	$(CC) $(CFLAGS1) $(CFLAGS2) HW1.cpp
+Normality.o: Normality.hpp 
+	$(CC) -c $(CFLAGS1) $(CFLAGS2) Normality.hpp
+Scrubber.o: Scrubber.hpp 
+	$(CC) -c $(CFLAGS1) $(CFLAGS2) Scrubber.hpp
+Outlier.o: Outlier.hpp 
+	$(CC) -c $(CFLAGS1) $(CFLAGS2) Outlier.hpp
+Record.o: Record.hpp 
+	$(CC) -c $(CFLAGS1) $(CFLAGS2) Record.hpp
+Utils.o: Utils.hpp 
+	$(CC) -c $(CFLAGS1) $(CFLAGS2) Utils.hpp
+Logging.o: Logging.hpp
+	$(CC) -c $(CFLAGS1) $(CFLAGS2) Logging.hpp
+
+.PHONY: clean cleanest
+
+clean:
+	rm *.o
+
+cleanest: clean
+	rm Assignment_A
