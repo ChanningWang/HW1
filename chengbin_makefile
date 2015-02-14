@@ -8,7 +8,7 @@ LPFLAGS = -L/share/apps/openmpi-intel/1.6.4_hcoll/lib -L/scratch/chengbin.wang/i
 
 all: main clean
 
-main: HW1.o Normality.o Scrubber.o Outlier.o Record.o Utils.o Logging.o
+main: HW1.o Normality.o Scrubber.o OutlierDetecter.o Record.o Utils.o Logging.o
 	$(CC) $(CFLAGS1) $(LPFLAGS) $(LDFLAGS) -o main HW1.o Normality.o Scrubber.o OutlierDetecter.o Record.o Utils.o Logging.o 
 
 HW1.o: HW1.cpp 
