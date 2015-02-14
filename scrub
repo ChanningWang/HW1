@@ -13,7 +13,7 @@ BULK_NUMBER=`expr $File_Size + 1`
 fi
 split -b ${BULK_SIZE}k $1 bulk
 echo "Split Input File into $BULK_NUMBER bulks with ${BULK_SIZE}k"
-#mpirun -np ${BULK_NUMBER} ./HW1.out SCRUB
+#mpirun -np ${BULK_NUMBER} ./main SCRUB
 rm bulk*
 cat signal.bulk*.txt > signal.txt
 cat noise.bulk*.txt > noise.txt
@@ -24,7 +24,7 @@ rm noise.bulk*.txt
 
 #do normality analysis
 cut -f2 -d',' signal.txt > price.txt
-mpirun -np 1 ./HW1.out NORMAL
+mpirun -np 1 ./main NORMAL
 
 
 
