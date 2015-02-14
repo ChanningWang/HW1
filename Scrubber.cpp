@@ -64,7 +64,7 @@ public:
 		std::ifstream fileStream(raw_file);
 		std::vector<string> strs;
 		Record r;
-
+        cout<<"Handling File: "<<raw_file<<endl;
 		clock_t begin=clock();
 		while (getline(fileStream, line, '\n')) {
 				trim(line);
