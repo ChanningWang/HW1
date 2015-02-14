@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
 	if (argc == 2) {
 		if (strcmp(argv[1], "SCRUB") == 0) {
-			int* rank;
+			int* rank=0;
 			int* size;
 			//	 MPI_Init (&argc, &argv); /* starts MPI */
 			//	 MPI_Comm_rank (MPI_COMM_WORLD, rank); /* get current process id */
