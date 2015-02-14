@@ -1,0 +1,32 @@
+#! /bin/sh
+
+#do scrub
+
+File_Size=`du -k $1 | cut -f1`
+echo "Input File size: ${File_Size}k"
+BULK_SIZE=`expr $File_Size / 500`
+BULK_NUMBER=`expr $File_Size / $BULK_SIZE`
+remainder=`expr $File_Size % $BULK_SIZE`
+if [ $? -gt 0 ] 
+then
+BULK_NUMBER=`expr $File_Size + 1`
+fi
+split -b ${BULK_SIZE}k $1 bulk
+echo "Split Input File into $BULK_NUMBER bulks with ${BULK_SIZE}k"
+#mpirun -np ${BULK_NUMBER} ./HW1.out SCRUB
+rm bulk*
+cat signal.bulk*.txt > signal.txt
+cat noise.bulk*.txt > noise.txt
+rm signal.bulk*.txt
+rm noise.bulk*.txt
+
+#sort -t ',' -k1,1 signal.txt > signal.sorted
+
+#do normality analysis
+cut -f2 -d',' signal.txt > price.txt
+mpirun -np 1 ./HW1.out NORMAL
+
+
+
+
+
