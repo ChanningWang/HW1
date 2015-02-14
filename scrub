@@ -3,30 +3,29 @@
 #do scrub
 
 LINE_NUMBER=`wc -l $1 | cut -f1 -d' '`
-echo "Input File line number: ${LINE_NUMBER}k"
+echo "Input File line number: ${LINE_NUMBER}"
 BULK_LINE=`expr $LINE_NUMBER / 100`
 BULK_NUMBER=`expr $LINE_NUMBER / $BULK_LINE`
 remainder=`expr $LINE_NUMBER % $BULK_LINE`
-if [ $? -gt 0 ] 
+if [ $? -gt 0 ]
 then
 BULK_NUMBER=`expr $BULK_NUMBER + 1`
 fi
-split -l ${BULK_LINE}k $1 bulk
+split -l ${BULK_LINE} $1 bulk
 echo "Split Input File into $BULK_NUMBER bulks with ${BULK_LINE} lines"
 mpirun -np ${BULK_NUMBER} ./main SCRUB
-#rm bulk*
-cat signal.bulk*.txt > signal.txt
-cat noise.bulk*.txt > noise.txt
-#rm signal.bulk*.txt
-#rm noise.bulk*.txt
 
-#sort -t ',' -k1,1 signal.txt > signal.sorted
+find ./ -type f -name "signal.bulk*" -exec cat {} \; > signal.txt
+find ./ -type f -name "noise.bulk*" -exec cat {} \; > noise.txt
+
 
 #do normality analysis
-#cut -f2 -d',' signal.txt > price.txt
-#mpirun -np 1 ./main NORMAL
+sort -t ',' -k1,1 signal.txt > signal.sorted
+cut -f2 -d',' signal.sorted > price.txt
+mpirun -np 1 ./main NORMAL
 
-
-
-
+#cleanup
+rm *bulk*
+rm price.txt
+rm signal.sorted
 
