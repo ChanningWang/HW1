@@ -17,7 +17,7 @@ Normality.o: Normality.cpp
 	$(CC) $(CFLAGS1) $(CFLAGS2) -c -oNormality.o Normality.cpp
 Scrubber.o: Scrubber.cpp 
 	$(CC) $(CFLAGS1) $(CFLAGS2) -c -oScrubber.o Scrubber.cpp
-OutlierDetecter.o: Outlier.cpp 
+OutlierDetecter.o: OutlierDetecter.cpp 
 	$(CC) $(CFLAGS1) $(CFLAGS2) -c -oOutlierDetecter.o OutlierDetecter.cpp
 Record.o: Record.cpp 
 	$(CC) $(CFLAGS1) $(CFLAGS2) -c -oRecord.o Record.cpp
