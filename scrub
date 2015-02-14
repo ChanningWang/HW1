@@ -1,5 +1,6 @@
 #! /bin/sh
 
+export LD_LIBRARY_PATH=/scratch/chengbin.wang/install/log4cpp/lib:$LD_LIBRARY_PATH
 #do scrub
 
 LINE_NUMBER=`wc -l $1 | cut -f1 -d' '`
