@@ -6,7 +6,7 @@
 #include "mpi.h"
 
 
-#include "Normality.hpp"
+#include "Normality.cpp"
 
 
 using namespace std;
