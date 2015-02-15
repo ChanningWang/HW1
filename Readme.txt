@@ -39,6 +39,7 @@ HW1.cpp                 --- main class for execution. It will receive one progra
                            
 scrub                   --- scripts to run to invoke HW1
 chengbin_makefile       --- hw1 makefile
+log4cpp.properties      --- config file for log4cpp appenders
 
 
 ----------------------
