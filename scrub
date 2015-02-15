@@ -14,11 +14,14 @@ BULK_NUMBER=`expr $BULK_NUMBER + 1`
 fi
 split -l ${BULK_LINE} $1 bulk
 echo "Split Input File into $BULK_NUMBER bulks with ${BULK_LINE} lines"
-mpirun -np ${BULK_NUMBER} ./main SCRUB
+(time ls) 2>&1 | grep real | cut -f2
+LoadTime=`(time mpirun -np ${BULK_NUMBER} ./main SCRUB ) 2>&1 | grep real | cut -f2`
+echo "[total] Data Loading and Scrubbing takes $LoadTime" >> Assignment_A.log
 
-find ./ -type f -name "signal.bulk*" -exec cat {} \; > signal.txt
-find ./ -type f -name "noise.bulk*" -exec cat {} \; > noise.txt
-
+SignalTime=`(time find ./ -type f -name "signal.bulk*" -exec cat {} \; > signal.txt) 2>&1 | grep real | cut -f2`
+echo "[total] Combine and generating Singal.txt takes $SignalTime" >> Assignment_A.log
+NoiseTime=`(time find ./ -type f -name "noise.bulk*" -exec cat {} \; > noise.txt) 2>&1 | grep real | cut -f2`
+echo "[total] Combine and generating noise.txt  takes $NoiseTime" >> Assignment_A.log
 
 #do normality analysis
 sort -t ',' -k1,1 signal.txt > signal.sorted
