@@ -25,8 +25,8 @@ int main(int argc, char *argv[]) {
 				 MPI_Init (&argc, &argv); /* starts MPI */
 				 MPI_Comm_rank (MPI_COMM_WORLD, &rank); /* get current process id */
 				 MPI_Comm_size (MPI_COMM_WORLD, &size); /* get number of processes */
-			int first_i = (rank - 1) / 26;
-			int second_i = (rank - 1) % 26;
+			int first_i = (rank ) / 26;
+			int second_i = (rank ) % 26;
 			char first_c = first_i + 'a';
 			char second_c = second_i + 'a';
 			std::ostringstream os;
